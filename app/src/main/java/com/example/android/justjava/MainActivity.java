@@ -53,7 +53,10 @@ public class MainActivity extends AppCompatActivity {
      * Use For: onClick
      */
     public void submitOrder(View view) {
+        String
         displayPrice(quantity * 5);
+//        String priceMessage = "Free";
+//        displayMessage(priceMessage);
     }
 
     /** Displays the number of drinks to order on the app screen.
@@ -77,6 +80,20 @@ public class MainActivity extends AppCompatActivity {
      */
     private void displayPrice(int number) {
         TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
-        priceTextView.setText(NumberFormat.getCurrencyInstance().format(number));
+
+        String message = "Total: $" + NumberFormat.getCurrencyInstance().format(number) + "\nThank You!";
+        priceTextView.setText(message);
+    }
+
+    /** Displays the given text on the app screen.
+     *
+     *@param    message - The text to display
+     *@see      MainActivity.display
+     *
+     * Example Input: displayMessage("Lorem Ipsu");
+    */
+    private void displayMessage(String message) {
+        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
+        priceTextView.setText(message);
     }
 }
