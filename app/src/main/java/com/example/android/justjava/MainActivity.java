@@ -15,10 +15,34 @@ import java.text.NumberFormat;
 /** Allows the user to order drinks. */
 public class MainActivity extends AppCompatActivity {
 
+    int quantity = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
+
+    /** Increases the number of drinks to order by 1.
+     *
+     *@see  MainActivity.decrement
+     *
+     * Use For: onClick
+     */
+    public void increment(View view) {
+        quantity += 1;
+        display(quantity);
+    }
+
+    /** Decreases the number of drinks to order by 1.
+     *
+     *@see  MainActivity.increment
+     *
+     * Use For: onClick
+     */
+    public void decrement(View view) {
+        quantity -= 1;
+        display(quantity);
     }
 
     /** Updates the screen with the current order.
@@ -29,8 +53,6 @@ public class MainActivity extends AppCompatActivity {
      * Use For: onClick
      */
     public void submitOrder(View view) {
-        int quantity = 2;
-        display(quantity);
         displayPrice(quantity * 5);
     }
 
