@@ -7,10 +7,10 @@ package com.example.android.justjava;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
-
-import java.text.NumberFormat;
 
 /** Allows the user to order drinks. */
 public class MainActivity extends AppCompatActivity {
@@ -19,13 +19,21 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        TextView splashMessage = new TextView(this);
+        splashMessage.setText("Loading...");
+        splashMessage.setTextSize(24);
+        splashMessage.setGravity(17); //https://developer.android.com/reference/android/view/Gravity.html#CENTER
+        setContentView(splashMessage);
+        // setContentView(R.layout.splash);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
 
     /** Increases the number of drinks to order by 1.
      *
-     *@see  MainActivity.decrement
+     *@see  this.decrement
      *
      * Use For: onClick
      */
@@ -36,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
     /** Decreases the number of drinks to order by 1.
      *
-     *@see  MainActivity.increment
+     *@see  this.increment
      *
      * Use For: onClick
      */
@@ -45,24 +53,35 @@ public class MainActivity extends AppCompatActivity {
         display(quantity);
     }
 
+    private String createOrderSummary() {
+        String summary = "Name: Kaptain Kunal" + "\n";
+        CheckBox viewWhippedCream = findViewById(R.id.hasWhippedCream);
+        if (viewWhippedCream.isChecked()){
+            summary += "Add Whipped Cream" + "\n";
+        }
+        summary += "Quantity :" + quantity + "\n";
+        summary += "Total: $" + calculatePrice(5) + "\n";
+        summary += "Thank you!";
+        return summary;
+    }
+
     /** Updates the screen with the current order.
      *
-     *@see  MainActivity.displayPrice
-     *@see  MainActivity.display
+     *@see  this.displayPrice
+     *@see  this.display
      *
      * Use For: onClick
      */
     public void submitOrder(View view) {
-        String
-        displayPrice(quantity * 5);
-//        String priceMessage = "Free";
-//        displayMessage(priceMessage);
+
+        String priceMessage = createOrderSummary();
+        displayMessage(priceMessage);
     }
 
     /** Displays the number of drinks to order on the app screen.
      *
      *@param    number - How many drinks to order
-     *@see      MainActivity.displayPrice
+     *@see      this.displayPrice
      *
      * Example Input: display(2);
      */
@@ -71,29 +90,22 @@ public class MainActivity extends AppCompatActivity {
         quantityTextView.setText("" + number);
     }
 
-    /** Displays the given price on the app screen.
-     *
-     *@param    number - The price to display
-     *@see      MainActivity.display
-     *
-     * Example Input: displayPrice(2 * 5);
-     */
-    private void displayPrice(int number) {
-        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
-
-        String message = "Total: $" + NumberFormat.getCurrencyInstance().format(number) + "\nThank You!";
-        priceTextView.setText(message);
+    private int calculatePrice(int unitPrice) {
+        return quantity * unitPrice;
     }
 
     /** Displays the given text on the app screen.
      *
      *@param    message - The text to display
-     *@see      MainActivity.display
+     *@see      this.display
      *
      * Example Input: displayMessage("Lorem Ipsu");
     */
     private void displayMessage(String message) {
-        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
+        TextView priceTextView = (TextView) findViewById(R.id.order_summary_text_view);
         priceTextView.setText(message);
+
+        String logMessage = priceTextView.getText().toString();
+        Log.v("MainActivity", logMessage);
     }
 }
