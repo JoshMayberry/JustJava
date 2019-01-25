@@ -10,12 +10,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /** Allows the user to order drinks. */
 public class MainActivity extends AppCompatActivity {
 
     int quantity = 1;
+
+    CheckBox viewWhippedCream;
+    CheckBox viewChacolate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        viewWhippedCream = findViewById(R.id.hasWhippedCream);
+        viewChacolate = findViewById(R.id.hasChacolate);
     }
 
     /** Increases the number of drinks to order by 1.
@@ -38,6 +46,11 @@ public class MainActivity extends AppCompatActivity {
      * Use For: onClick
      */
     public void increment(View view) {
+        if (quantity >= 100) {
+            Toast.makeText(this, "You cannot have more than 100 drinks", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         quantity += 1;
         display(quantity);
     }
@@ -49,15 +62,22 @@ public class MainActivity extends AppCompatActivity {
      * Use For: onClick
      */
     public void decrement(View view) {
+        if (quantity <= 1) {
+            Toast.makeText(this, "You cannot have less than 1 drink", Toast.LENGTH_SHORT).show();
+            return;
+        }
         quantity -= 1;
         display(quantity);
     }
 
     private String createOrderSummary() {
-        String summary = "Name: Kaptain Kunal" + "\n";
-        CheckBox viewWhippedCream = findViewById(R.id.hasWhippedCream);
+        EditText viewCustomerName = findViewById(R.id.customerName);
+        String summary = "Name: " + viewCustomerName.getText() + "\n";
         if (viewWhippedCream.isChecked()){
             summary += "Add Whipped Cream" + "\n";
+        }
+        if (viewChacolate.isChecked()){
+            summary += "Add Chacolate" + "\n";
         }
         summary += "Quantity :" + quantity + "\n";
         summary += "Total: $" + calculatePrice(5) + "\n";
@@ -91,6 +111,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private int calculatePrice(int unitPrice) {
+        if (viewChacolate.isChecked()){
+            unitPrice += 2;
+        }
+        if (viewWhippedCream.isChecked()){
+            unitPrice += 1;
+        }
+
         return quantity * unitPrice;
     }
 
