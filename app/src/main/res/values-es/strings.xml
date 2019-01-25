@@ -1,0 +1,38 @@
+<!--https://developer.android.com/distribute/best-practices/launch/localization-checklist?utm_source=udacity&utm_medium=course&utm_campaign=android_basics-->
+<!-- Translation from: https://gist.github.com/udacityandroid/759b8b4c9ed9e6806e90 -->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Unless otherwise noted: [CHAR LIMIT=20] -->
+
+    <!-- These are used by the splash screen -->
+    <string name="loading">Encargado…</string>
+
+    <!-- These are used as headers -->
+    <string name="app_name">Sólo Java</string> <!-- Title for the application. [CHAR LIMIT=12] -->
+    <string name="toppings">Ingredientes</string> <!-- The list of toppings -->
+    <string name="quantity">Cantidad</string> <!-- The picker used to select how many to order -->
+    <string name="order_summary">Ensumation</string> <!-- What will be sent to the email app -->
+
+    <!-- These are used as hint text -->
+    <string name="name">Nombre</string> <!-- The user's name -->
+
+    <!-- These are used for buttons -->
+    <string name="order">Ordenar</string> <!-- Send the receipt to the email app -->
+
+    <!-- Toppings that can be added to the drink -->
+    <string name="whipped_cream">Crema batida</string>
+    <string name="chacolate">Chocolate</string>
+
+    <!-- Toast messages that are displayed under certain conditions -->
+    <string name="toast_overflow">No se pueden pedir más de 100 cafés.</string> <!-- The user tries to order too many -->
+    <string name="toast_underflow">No se pueden pedir menos de 1 café.</string> <!-- The user tries to order too few -->
+
+    <!-- These are used to compose the email. [CHR LIMIT = NONE]-->
+    <string name="recept_subject">Sólo java para <xliff:g id="name" example="Amy">%s</xliff:g></string>  <!-- Subject line for the order summary email -->
+    <string name="recept_name">Nombre: <xliff:g id="name" example="Amy">%s</xliff:g></string> <!-- Name for the order summary -->
+    <string name="recept_quantity">Cantidad :<xliff:g id="quantity" example="1">%d</xliff:g></string> <!-- How many to order -->
+    <string name="recept_total">Total: $<xliff:g id="total" example="5">%d</xliff:g></string> <!-- How much the order will cost -->
+
+    <string name="recept_cream">Agregue la crema batida</string> <!-- Included if whipped cream should be added -->
+    <string name="recept_coco">Agregue el chocolate</string> <!-- Included if chocolate should be added -->
+    <string name="recept_ending">¡Gracias!</string> <!-- Thank you message for the order summary. [CHAR LIMIT=NONE] -->
+</resources>

@@ -18,7 +18,7 @@
             android:id="@+id/customerName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Name"
+            android:hint="@string/name"
             android:inputType="textCapWords"
             android:textSize="16sp"
             />
@@ -26,7 +26,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Toppigs"
+            android:text="@string/toppings"
             android:layout_marginBottom="24dp"
             android:textAllCaps="true"
             />
@@ -34,7 +34,7 @@
             android:id="@+id/hasWhippedCream"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Whipped Cream"
+            android:text="@string/whipped_cream"
             android:textSize="16sp"
             android:layout_marginBottom="16dp"
             />
@@ -42,7 +42,7 @@
             android:id="@+id/hasChacolate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Chacolate"
+            android:text="@string/chacolate"
             android:textSize="16sp"
             android:layout_marginBottom="16dp"
             />
@@ -51,7 +51,7 @@
             android:layout_marginBottom="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Quantity"
+            android:text="@string/quantity"
             android:textAllCaps="true"
             />
         <LinearLayout
@@ -61,7 +61,7 @@
             <Button
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:text="+"
+                android:text="@string/add"
                 android:onClick="increment"
                 />
             <TextView
@@ -72,12 +72,12 @@
                 android:textColor="@android:color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1"
+                android:text="@string/error"
                 />
             <Button
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:text="-"
+                android:text="@string/subtract"
                 android:onClick="decrement"
                 />
         </LinearLayout>
@@ -88,7 +88,7 @@
             android:layout_marginTop="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Order Summary"
+            android:text="@string/order_summary"
             android:textAllCaps="true"
             />
         <TextView
@@ -97,14 +97,14 @@
             android:textColor="@android:color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="10"
+            android:text="@string/error"
             />
 
         <Button
             android:layout_marginTop="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Order"
+            android:text="@string/order"
             android:onClick="submitOrder"
             />
     </LinearLayout>

@@ -5,6 +5,8 @@
 
 package com.example.android.justjava;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -21,12 +23,13 @@ public class MainActivity extends AppCompatActivity {
 
     CheckBox viewWhippedCream;
     CheckBox viewChacolate;
+    EditText viewCustomerName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         TextView splashMessage = new TextView(this);
-        splashMessage.setText("Loading...");
+        splashMessage.setText(getString(R.string.loading));
         splashMessage.setTextSize(24);
         splashMessage.setGravity(17); //https://developer.android.com/reference/android/view/Gravity.html#CENTER
         setContentView(splashMessage);
@@ -37,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         viewWhippedCream = findViewById(R.id.hasWhippedCream);
         viewChacolate = findViewById(R.id.hasChacolate);
+        viewCustomerName = findViewById(R.id.customerName);
     }
 
     /** Increases the number of drinks to order by 1.
@@ -47,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void increment(View view) {
         if (quantity >= 100) {
-            Toast.makeText(this, "You cannot have more than 100 drinks", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.toast_overflow), Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -63,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void decrement(View view) {
         if (quantity <= 1) {
-            Toast.makeText(this, "You cannot have less than 1 drink", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.toast_underflow), Toast.LENGTH_SHORT).show();
             return;
         }
         quantity -= 1;
@@ -71,17 +75,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private String createOrderSummary() {
-        EditText viewCustomerName = findViewById(R.id.customerName);
-        String summary = "Name: " + viewCustomerName.getText() + "\n";
+        String name = viewCustomerName.getText().toString();
+        String summary = getString(R.string.recept_name,name) + "\n";
         if (viewWhippedCream.isChecked()){
-            summary += "Add Whipped Cream" + "\n";
+            summary += getString(R.string.recept_cream) + "\n";
         }
         if (viewChacolate.isChecked()){
-            summary += "Add Chacolate" + "\n";
+            summary += getString(R.string.recept_coco) + "\n";
         }
-        summary += "Quantity :" + quantity + "\n";
-        summary += "Total: $" + calculatePrice(5) + "\n";
-        summary += "Thank you!";
+        summary += getString(R.string.recept_quantity, quantity) + "\n";
+        summary += getString(R.string.recept_total, calculatePrice(5)) + "\n";
+        summary += getString(R.string.recept_ending);
         return summary;
     }
 
@@ -96,6 +100,23 @@ public class MainActivity extends AppCompatActivity {
 
         String priceMessage = createOrderSummary();
         displayMessage(priceMessage);
+
+        //https://developer.android.com/guide/components/intents-common?utm_source=udacity&utm_medium=course&utm_campaign=android_basics#Email
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+        intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.recept_subject, viewCustomerName.getText().toString()));
+        intent.putExtra(Intent.EXTRA_TEXT, priceMessage);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+
+//        //https://developer.android.com/guide/components/intents-common?utm_source=udacity&utm_medium=course&utm_campaign=android_basics#Maps
+//        Intent intent = new Intent(Intent.ACTION_VIEW);
+//        intent.setData(Uri.parse("geo:47.6, -122.3"));
+//        if (intent.resolveActivity(getPackageManager()) != null) {
+//            startActivity(intent);
+//        }
+
     }
 
     /** Displays the number of drinks to order on the app screen.

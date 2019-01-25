@@ -1,3 +1,43 @@
-<resources>
-    <string name="app_name">Just Java</string>
+<!--https://developer.android.com/distribute/best-practices/launch/localization-checklist?utm_source=udacity&utm_medium=course&utm_campaign=android_basics-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Unless otherwise noted: [CHAR LIMIT=20] -->
+
+    <!-- These are used by the splash screen -->
+    <string name="loading">Loading…</string>
+
+    <!-- These are used as headers -->
+    <string name="app_name">Just Java</string> <!-- Title for the application. [CHAR LIMIT=12] -->
+    <string name="toppings">Toppings</string> <!-- The list of toppings -->
+    <string name="quantity">Quantity</string> <!-- The picker used to select how many to order -->
+    <string name="order_summary">Order Summary</string> <!-- What will be sent to the email app -->
+
+    <!-- These are used as hint text -->
+    <string name="name">Name</string> <!-- The user's name -->
+
+    <!-- These are used for buttons -->
+    <string name="order">Order</string> <!-- Send the receipt to the email app -->
+
+    <!-- Toppings that can be added to the drink -->
+    <string name="whipped_cream">Whipped Cream</string>
+    <string name="chacolate">Chocolate</string>
+
+    <!-- Toast messages that are displayed under certain conditions -->
+    <string name="toast_overflow">You cannot have more than 100 drinks</string> <!-- The user tries to order too many -->
+    <string name="toast_underflow">You cannot have less than 1 drink</string> <!-- The user tries to order too few -->
+
+    <!-- Utility Strings to not translate -->
+    <string name="add" translatable="false">+</string>
+    <string name="error" translatable="false">N/A</string>
+    <string name="subtract" translatable="false">-</string>
+
+    <!-- These are used to compose the email. [CHR LIMIT = NONE]-->
+    <string name="recept_subject">Just Java order for <xliff:g id="name" example="Amy">%s</xliff:g></string>  <!-- Subject line for the order summary email -->
+    <string name="recept_name">Name: <xliff:g id="name" example="Amy">%s</xliff:g></string> <!-- Name for the order summary -->
+    <string name="recept_quantity">Quantity :<xliff:g id="quantity" example="1">%d</xliff:g></string> <!-- How many to order -->
+    <string name="recept_total">Total: $<xliff:g id="total" example="5">%d</xliff:g></string> <!-- How much the order will cost -->
+
+    <string name="recept_cream">Add Whipped Cream</string> <!-- Included if whipped cream should be added -->
+    <string name="recept_coco">Add Chocolate</string> <!-- Included if chocolate should be added -->
+    <string name="recept_ending">Thank you!</string> <!-- Thank you message for the order summary -->
+
 </resources>
